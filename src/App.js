@@ -1,10 +1,18 @@
-import './App.css';
+import React from 'react';
+import NavBar from './components/Navbar/NavBar';
+import landingPic from './images/landingPic.jpg';
+import Hero from './components/hero/Hero';
+import Featured from './components/featured/Featured';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <h1>React App</h1>
-    </div>
+    <>
+    <NavBar/>
+    <Hero/>
+    <Featured/>
+    <Footer/>
+    </>
   );
 }
 
