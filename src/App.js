@@ -1,17 +1,21 @@
-import React from 'react';
-import NavBar from './components/Navbar/NavBar';
-import landingPic from './images/landingPic.jpg';
-import Hero from './components/hero/Hero';
-import Featured from './components/featured/Featured';
-import Footer from './components/Footer/Footer';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
     <>
-    <NavBar/>
-    <Hero/>
-    <Featured/>
-    <Footer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/index" element={<Home />} />
+          <Route path="/ProductDetail" element={<ProductDetail />} />
+          <Route path="/ContactUs" element={<ContactUs />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

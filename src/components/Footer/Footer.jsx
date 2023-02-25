@@ -178,7 +178,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="/"
-                      className="transition-colors duration-300 text-white hover:text-text-gray-500"
+                      className="transition-colors duration-300 text-white hover:text-gray-500"
                     >
                       Infopreneur
                     </a>
@@ -186,7 +186,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="/"
-                      className="transition-colors duration-300 text-white hover:text-text-gray-500"
+                      className="transition-colors duration-300 text-white hover:text-gray-500"
                     >
                       Personal
                     </a>
@@ -194,7 +194,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="/"
-                      className="transition-colors duration-300 text-white hover:text-text-gray-500"
+                      className="transition-colors duration-300 text-white hover:text-gray-500"
                     >
                       Wiki
                     </a>
@@ -202,7 +202,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="/"
-                      className="transition-colors duration-300 text-white hover:text-text-gray-500"
+                      className="transition-colors duration-300 text-white hover:text-gray-500"
                     >
                       Forum
                     </a>

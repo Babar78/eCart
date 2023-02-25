@@ -1,0 +1,17 @@
+label{
+  border: 2px solid #1F2937;
+  color: #1F2937;
+  font-size: 1.2rem;
+  font-weight: medium;
+  padding: 0.5rem 1rem;
+}
+label:hover{
+  color:#F97316;
+  border:2px solid #F97316
+}
+
+input[type="radio"]:checked + .label{
+  background-color: #F97316;
+  border: 2px solid #F97316;
+  color: #1F2937;
+}
