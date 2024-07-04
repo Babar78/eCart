@@ -5,7 +5,21 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
+type FormProps = {
+  email: string;
+  password: string;
+};
+
 const LoginPage = () => {
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: string, field: keyof FormProps) => {
+    setData({ ...data, [field]: e });
+  };
+
   return (
     <div className="lg:bg-white lg:grid lg:grid-cols-7 gap-20 h-screen w-screen overflow-hidden loginOuterDiv sm:p-0 p-10">
       <section className="col-span-4 lg:flex hidden items-center">
@@ -39,10 +53,10 @@ const LoginPage = () => {
             name="email"
             label="Email"
             variant="standard"
-            value=""
+            value={data.email}
             type="email"
             inputFieldType="textField"
-            onChange={() => {}}
+            onChange={(newValue) => handleChange(newValue, "email")}
           />
           <div className="w-full flex flex-col items-end gap-2">
             <CustomInput
@@ -50,10 +64,10 @@ const LoginPage = () => {
               name="password"
               label="Password"
               variant="standard"
-              value=""
+              value={data.password}
               type="password"
               inputFieldType="passwordField"
-              onChange={() => {}}
+              onChange={(newValue) => handleChange(newValue, "password")}
             />
             <button className="text-gray-400 hover:text-orange-400 text-[14px]">
               Forget Password?

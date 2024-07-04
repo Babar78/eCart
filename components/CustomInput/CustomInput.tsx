@@ -22,7 +22,7 @@ interface CustomInputProps {
   variant: "outlined" | "filled" | "standard";
   inputFieldType: string;
   type?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: string) => void;
 }
 
 const CustomInput = ({
@@ -52,7 +52,7 @@ const CustomInput = ({
       label={label}
       variant={variant}
       value={value}
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)}
       type={type}
       fullWidth
     />
@@ -78,7 +78,7 @@ const CustomInput = ({
             </InputAdornment>
           }
           label={label}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
         />
       ) : variant === "filled" ? (
         <FilledInput
@@ -98,14 +98,14 @@ const CustomInput = ({
               </IconButton>
             </InputAdornment>
           }
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
         />
       ) : variant === "standard" ? (
         <Input
           id={id}
           name={name}
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
           type={showPassword ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">
