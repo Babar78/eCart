@@ -31,3 +31,14 @@ body {
     text-wrap: balance;
   }
 }
+
+@media (max-width: 1023px) {
+  .loginOuterDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/public/assets/login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}

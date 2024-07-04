@@ -6,10 +6,12 @@ interface CustomButtonProps {
   id: string;
   label: string;
   type: "button" | "submit" | "reset";
-  onClick: () => void;
-  disabled: boolean;
-  filled: boolean;
-  icon: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
+  filled?: boolean;
+  icon?: boolean;
+  width?: string;
+  size?: string;
 }
 
 const CustomButton = ({
@@ -20,6 +22,8 @@ const CustomButton = ({
   disabled,
   filled,
   icon,
+  width,
+  size,
 }: CustomButtonProps) => {
   return (
     <Button
@@ -30,6 +34,8 @@ const CustomButton = ({
       color="orange"
       id={id}
       rightSection={icon ? <IconDownload size={14} /> : null}
+      fullWidth={width === "full" ? true : false}
+      size={size}
     >
       {label}
     </Button>
