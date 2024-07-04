@@ -1,24 +1,28 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import FilledInput from "@mui/material/FilledInput";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
+import Autocomplete from "@mui/material/Autocomplete";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
+import { countries } from "../../constants/countries";
+
 interface CustomInputProps {
   id: string;
   name: string;
   label: string;
-  value: string;
+  value?: string;
   variant: "outlined" | "filled" | "standard";
   inputFieldType: string;
-  type: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = ({
@@ -117,6 +121,45 @@ const CustomInput = ({
         />
       ) : null}
     </FormControl>
+  ) : inputFieldType === "selectCountry" ? (
+    <Autocomplete
+      id={id}
+      fullWidth
+      options={countries}
+      autoHighlight
+      getOptionLabel={(option) => option.label}
+      renderOption={(props, option) => {
+        const { key, ...optionProps } = props;
+        return (
+          <Box
+            key={key}
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...optionProps}
+          >
+            <img
+              loading="lazy"
+              width="20"
+              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+              alt=""
+            />
+            {option.label} ({option.code}) +{option.phone}
+          </Box>
+        );
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant={variant}
+          label={label}
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: "new-password", // disable autocomplete and autofill
+          }}
+        />
+      )}
+    />
   ) : null;
 };
 
