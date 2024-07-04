@@ -23,6 +23,7 @@ interface CustomInputProps {
   inputFieldType: string;
   type?: string;
   onChange: (e: string) => void;
+  required?: boolean;
 }
 
 const CustomInput = ({
@@ -34,6 +35,7 @@ const CustomInput = ({
   type,
   inputFieldType,
   onChange,
+  required,
 }: CustomInputProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -55,6 +57,7 @@ const CustomInput = ({
       onChange={(e) => onChange(e.target.value)}
       type={type}
       fullWidth
+      required={required}
     />
   ) : inputFieldType === "passwordField" ? (
     <FormControl variant={variant} fullWidth>
@@ -64,6 +67,7 @@ const CustomInput = ({
           id={id}
           name={name}
           value={value}
+          required={required}
           type={showPassword ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">
@@ -85,6 +89,7 @@ const CustomInput = ({
           id={id}
           name={name}
           value={value}
+          required={required}
           type={showPassword ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">
@@ -105,6 +110,7 @@ const CustomInput = ({
           id={id}
           name={name}
           value={value}
+          required={required}
           onChange={(e) => onChange(e.target.value)}
           type={showPassword ? "text" : "password"}
           endAdornment={
@@ -125,6 +131,9 @@ const CustomInput = ({
     <Autocomplete
       id={id}
       fullWidth
+      onChange={(e, selectedOption) => {
+        onChange(selectedOption?.label!);
+      }}
       options={countries}
       autoHighlight
       getOptionLabel={(option) => option.label}
@@ -153,6 +162,7 @@ const CustomInput = ({
           {...params}
           variant={variant}
           label={label}
+          required={required}
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill

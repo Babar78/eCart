@@ -5,7 +5,27 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
+type FormProps = {
+  username: string;
+  email: string;
+  country: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const Signup = () => {
+  const [data, setData] = React.useState({
+    username: "",
+    email: "",
+    country: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e: string, field: keyof FormProps) => {
+    setData({ ...data, [field]: e });
+  };
+
   return (
     <div className="lg:bg-white lg:grid lg:grid-cols-7 gap-20 h-screen w-screen overflow-hidden loginOuterDiv sm:p-0 p-10">
       <section className="col-span-4 lg:flex hidden items-center">
@@ -36,48 +56,55 @@ const Signup = () => {
             name="username"
             label="Username"
             variant="standard"
-            value=""
+            value={data.username}
             type="text"
             inputFieldType="textField"
-            onChange={() => {}}
+            onChange={(newValue) => handleChange(newValue, "username")}
+            required={true}
           />
           <CustomInput
             id="email"
             name="email"
             label="Email"
             variant="standard"
-            value=""
+            value={data.email}
             type="email"
             inputFieldType="textField"
-            onChange={() => {}}
+            onChange={(newValue) => handleChange(newValue, "email")}
+            required={true}
           />
           <CustomInput
             id="password"
             name="password"
             label="Password"
             variant="standard"
-            value=""
+            value={data.password}
             type="password"
             inputFieldType="passwordField"
-            onChange={() => {}}
+            onChange={(newValue) => handleChange(newValue, "password")}
+            required={true}
           />
           <CustomInput
             id="confirm-password"
             name="confirm-password"
             label="Confirm Password"
             variant="standard"
-            value=""
+            value={data.confirmPassword}
             type="password"
             inputFieldType="passwordField"
-            onChange={() => {}}
+            onChange={(newValue) => handleChange(newValue, "confirmPassword")}
+            required={true}
           />
           <CustomInput
             id="country"
             name="country"
             label="Choose a country"
+            value={data.country}
             variant="standard"
             type="text"
             inputFieldType="selectCountry"
+            onChange={(newValue) => handleChange(newValue, "country")}
+            required={true}
           />
           <CustomButton
             id="Signup"
