@@ -20,6 +20,12 @@ const LoginPage = () => {
     setData({ ...data, [field]: e });
   };
 
+  // Handle form submit
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(JSON.stringify(data));
+  };
+
   return (
     <div className="lg:bg-white lg:grid lg:grid-cols-7 gap-20 h-screen w-screen overflow-hidden loginOuterDiv sm:p-0 p-10">
       <section className="col-span-4 lg:flex hidden items-center">
@@ -41,8 +47,8 @@ const LoginPage = () => {
           />
         </div>
         <form
-          action=""
           className="sm:w-[370px] w-full mt-5 space-y-10 lg:pr-[20px]"
+          onSubmit={handleFormSubmit}
         >
           <div className="lg:text-start text-center">
             <h5 className="font-semibold text-[36px]">Login to eCart</h5>
