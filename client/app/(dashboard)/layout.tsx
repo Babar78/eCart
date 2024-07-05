@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { MantineProvider } from "@mantine/core";
 import Navbar from "@/components/Navbar/Navbar";
 import Topbar from "@/components/Topbar/Topbar";
@@ -14,7 +13,7 @@ export default function RootLayout({
       <body>
         <MantineProvider>
           <StoreProvider>
-            <div className="fixed z-[1000]">
+            <div className="fixed">
               <Topbar />
               <Navbar />
             </div>

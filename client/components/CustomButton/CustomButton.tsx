@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mantine/core";
+import Button from "@mui/material/Button";
 import { IconDownload } from "@tabler/icons-react";
 
 interface CustomButtonProps {
@@ -8,10 +8,10 @@ interface CustomButtonProps {
   type: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
-  filled?: boolean;
+  variant?: "outlined" | "contained";
   icon?: boolean;
   width?: string;
-  size?: string;
+  size?: "small" | "medium" | "large";
 }
 
 const CustomButton = ({
@@ -20,7 +20,7 @@ const CustomButton = ({
   type,
   onClick,
   disabled,
-  filled,
+  variant,
   icon,
   width,
   size,
@@ -29,13 +29,17 @@ const CustomButton = ({
     <Button
       type={type}
       onClick={onClick}
-      variant={filled ? "filled" : "outline"}
+      variant={variant ? variant : "contained"}
       disabled={disabled}
-      color="orange"
       id={id}
-      rightSection={icon ? <IconDownload size={14} /> : null}
+      endIcon={icon ? <IconDownload size={14} /> : null}
       fullWidth={width === "full" ? true : false}
       size={size}
+      className={`${
+        variant === "outlined"
+          ? "border-[1px] border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
+          : "bg-orange-400 text-white hover:bg-orange-600 hover:text-white"
+      } capitalize hover:border-orange-600`}
     >
       {label}
     </Button>

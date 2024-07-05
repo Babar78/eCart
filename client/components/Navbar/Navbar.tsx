@@ -7,29 +7,10 @@ import CustomSearchbar from "../CustomSearchbar/CustomSearchbar";
 import logo from "@/public/assets/logo/logo1.png";
 import Link from "next/link";
 import Image from "next/image";
-import CustomButton from "../CustomButton/CustomButton";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
-import Badge from "@mui/material/Badge";
-import { styled } from "@mui/material/styles";
-import { useAppSelector } from "@/lib/store/hooks";
+
+import CartButton from "../CartButton/CartButton";
+import UserProfile from "../UserProfile/UserProfile";
 const Navbar = () => {
-  const [loggedIn, setLoggedIn] = React.useState(false);
-
-  const StyledBadge = styled(Badge)(({ theme }) => ({
-    "& .MuiBadge-badge": {
-      border: `2px solid #ffffff`,
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: "20px",
-      height: "20px",
-      padding: 0,
-    },
-  }));
-
-  const count = useAppSelector((state) => state.cart.value);
-
   return (
     <nav className="navbar">
       <AppBar
@@ -70,20 +51,8 @@ const Navbar = () => {
             </Link>
           </Box>
           <CustomSearchbar />
-          <StyledBadge badgeContent={count} color="error" className="text-sm">
-            <LocalMallIcon className="text-[#1a1a1a] cursor-pointer text-2xl" />
-          </StyledBadge>
-          {!loggedIn && (
-            <Link href={"/login"}>
-              <CustomButton
-                id="login"
-                label="Login"
-                type="button"
-                filled={true}
-                size="small"
-              />
-            </Link>
-          )}
+          <CartButton />
+          <UserProfile />
         </Toolbar>
       </AppBar>
     </nav>
