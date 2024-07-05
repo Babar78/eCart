@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,8 +7,29 @@ import CustomSearchbar from "../CustomSearchbar/CustomSearchbar";
 import logo from "@/public/assets/logo/logo1.png";
 import Link from "next/link";
 import Image from "next/image";
-
+import CustomButton from "../CustomButton/CustomButton";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import { useAppSelector } from "@/lib/store/hooks";
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      border: `2px solid #ffffff`,
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "20px",
+      height: "20px",
+      padding: 0,
+    },
+  }));
+
+  const count = useAppSelector((state) => state.cart.value);
+
   return (
     <nav className="navbar">
       <AppBar
@@ -29,7 +51,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="#"
+              href="/about"
               className="text-[#1a1a1a] hover:text-orange-400 uppercase text-nowrap"
             >
               About
@@ -48,6 +70,20 @@ const Navbar = () => {
             </Link>
           </Box>
           <CustomSearchbar />
+          <StyledBadge badgeContent={count} color="error" className="text-sm">
+            <LocalMallIcon className="text-[#1a1a1a] cursor-pointer text-2xl" />
+          </StyledBadge>
+          {!loggedIn && (
+            <Link href={"/login"}>
+              <CustomButton
+                id="login"
+                label="Login"
+                type="button"
+                filled={true}
+                size="small"
+              />
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
     </nav>
