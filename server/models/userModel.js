@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { randomBytes, createHmac } from "crypto";
-import { createTokenForUser } from "../services/authentication.js";
+import { createTokenForUser } from "../services/auth.js";
 
 const userSchema = new Schema({
     username: {

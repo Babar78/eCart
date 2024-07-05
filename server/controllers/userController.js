@@ -24,3 +24,4 @@ export const login = async (req, res) => {
         return res.status(400).json({ message: "Incorrect Email or Password" });
     }
 };
+
