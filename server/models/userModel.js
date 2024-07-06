@@ -67,7 +67,7 @@ userSchema.pre("save", function (next) {
 
 // Static method to match password and generate token
 userSchema.static(
-    "matchPasswordAndGenerateToken",
+    "matchPasswordAndReturnUser",
     async function (email, password) {
         const user = await this.findOne({ email });
         if (!user) throw new Error("User not found!");
@@ -82,10 +82,8 @@ userSchema.static(
         if (hashedPassword !== userProvidedHash)
             throw new Error("Incorrect Password!");
 
-        const token = createTokenForUser(user);
-        return token;
+        return user;
     }
 );
-
 
 export default model("User", userSchema);

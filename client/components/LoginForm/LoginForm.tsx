@@ -2,6 +2,8 @@
 import React from "react";
 import CustomButton from "../CustomButton/CustomButton";
 import CustomInput from "../CustomInput/CustomInput";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { login } from "@/lib/store/features/authSlice/authSlice";
 
 type FormProps = {
   email: string;
@@ -9,6 +11,8 @@ type FormProps = {
 };
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
+
   const [data, setData] = React.useState({
     email: "",
     password: "",
@@ -21,7 +25,7 @@ const LoginForm = () => {
   // Handle form submit
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(JSON.stringify(data));
+    dispatch(login(data));
   };
 
   return (

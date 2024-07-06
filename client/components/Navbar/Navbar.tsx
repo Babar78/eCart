@@ -1,10 +1,9 @@
-"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import CustomSearchbar from "../CustomSearchbar/CustomSearchbar";
-import logo from "@/public/assets/logo/logo1.png";
+import logo from "@/public/logo/logo1.png";
 import Link from "next/link";
 import Image from "next/image";
 

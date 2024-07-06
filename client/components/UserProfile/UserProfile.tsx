@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import CustomButton from "../CustomButton/CustomButton";
@@ -7,9 +8,13 @@ import {
   IconMessageCircle,
   IconLogout,
 } from "@tabler/icons-react";
+import { useAppSelector } from "@/lib/store/hooks";
 
 const UserProfile = () => {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const loggedIn = useAppSelector((state) => state.auth.isAuthenticated);
+
+  console.log(loggedIn);
+
   return !loggedIn ? (
     <Link href={"/login"}>
       <CustomButton

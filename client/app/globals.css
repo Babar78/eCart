@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../public/assets/authPageImg.svg");
+    background-image: url("../public/authPageImg.svg");
     background-size: cover;
     background-repeat: no-repeat;
   }
