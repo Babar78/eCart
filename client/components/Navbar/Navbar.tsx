@@ -19,7 +19,16 @@ const Navbar = () => {
       >
         <Toolbar className="max-w-[1240px] mx-auto w-full space-x-10 p-0!">
           <div className="grow">
-            <Image src={logo} alt="" className="max-w-[150px]" />
+            <Link href={"/"}>
+              <Image
+                src={logo}
+                alt="Website Logo"
+                priority
+                width={150}
+                height={50}
+                style={{ width: "50%", height: "auto" }}
+              />
+            </Link>
           </div>
           <Box
             className="flex gap-5"
