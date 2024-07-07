@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../CustomButton/CustomButton";
 import CustomInput from "../CustomInput/CustomInput";
-import { useAppDispatch } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { login } from "@/lib/store/features/authSlice/authSlice";
+import { useRouter } from "next/navigation";
 
 type FormProps = {
   email: string;
@@ -27,6 +28,17 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(login(data));
   };
+
+  const router = useRouter();
+
+  const { username, isAuthenticated } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    console.log("Authenticated", isAuthenticated);
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
 
   return (
     <form

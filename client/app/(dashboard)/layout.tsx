@@ -1,6 +1,9 @@
-import { MantineProvider } from "@mantine/core";
+"use client";
 import Navbar from "@/components/Navbar/Navbar";
 import Topbar from "@/components/Topbar/Topbar";
+import { useEffect } from "react";
+import { useAppSelector } from "@/lib/store/hooks";
+import { useRouter } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -8,16 +11,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <MantineProvider>
-            <div className="fixed">
-              <Topbar />
-              <Navbar />
-            </div>
-            <div className="pt-[112.7px]">{children}</div>
-        </MantineProvider>
-      </body>
-    </html>
+    <>
+      <div className="fixed">
+        <Topbar />
+        <Navbar />
+      </div>
+      <div className="pt-[112.7px]">{children}</div>
+    </>
   );
 }

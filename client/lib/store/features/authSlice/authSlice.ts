@@ -17,6 +17,12 @@ interface AuthState {
     profilePictureURL: string;
 }
 
+// Define a type for the user data
+interface UserData {
+    email: string;
+    password: string;
+}
+
 const initialState: AuthState = {
     authLoading: false,
     isAuthenticated: false,
@@ -29,13 +35,6 @@ const initialState: AuthState = {
     phone: '',
     cnic: '',
     profilePictureURL: '',
-}
-
-
-// Define a type for the user data
-interface UserData {
-    email: string;
-    password: string;
 }
 
 export const authSlice = createSlice({
@@ -58,13 +57,9 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         // login
         builder.addCase(login.pending, (state, action) => {
-            console.log("Pending");
-
             state.authLoading = true;
         })
         builder.addCase(login.fulfilled, (state, action) => {
-            console.log("Fulfilled");
-
             state.authLoading = false;
             state.isAuthenticated = true;
             state._id = action.payload._id;
