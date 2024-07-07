@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../lib/store/store";
 import { fillSavedData } from "@/lib/store/features/authSlice/authSlice";
@@ -16,10 +16,17 @@ export default function StoreProvider({
     storeRef.current = makeStore();
 
     // Fill the saved data from cookies if it exists\
-    if (Cookies.get("userData")) {
-      storeRef.current.dispatch(fillSavedData(Cookies.get("userData")));
-    }
+    // if (Cookies.get("userData")) {
+    //   storeRef.current.dispatch(fillSavedData(Cookies.get("userData")));
+    // }
   }
+  // Using use effect to avoid server and client side rendering issues
+  useEffect(() => {
+    const userData = Cookies.get("userData");
+    if (userData) {
+      storeRef.current?.dispatch(fillSavedData(userData));
+    }
+  }, []);
 
   return <Provider store={storeRef.current}>{children}</Provider>;
 }

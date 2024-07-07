@@ -17,12 +17,7 @@ const LoginPage = () => {
       </section>
       <section className="lg:col-span-3 lg:flex flex-col justify-center lg:items-start items-center lg:bg-transparent bg-white lg:rounded-none rounded-lg lg:p-0 p-10 sm:w-fit w-full">
         <div className="lg:block flex items-center justify-center">
-          <Image
-            src="/logo/logo1.png"
-            alt="Logo"
-            width={150}
-            height={100}
-          />
+          <Image src="/logo/logo1.png" alt="Logo" width={150} height={100} />
         </div>
         <LoginForm />
         <div className="lg:w-[370px] w-full mt-5">

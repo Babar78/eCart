@@ -29,9 +29,10 @@ const LoginForm = () => {
     dispatch(login(data));
   };
 
+  // Redirect to home page after successful signup
   const router = useRouter();
 
-  const {isAuthenticated } = useAppSelector((state) => state.auth);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAuthenticated) {

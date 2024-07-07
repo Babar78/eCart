@@ -5,14 +5,15 @@ import "./globals.css";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import StoreProvider from "./StoreProvider";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "eCart",
-  description:
-    "eCart is an e-commerce platform built with Next.js and Mantine.",
-};
+// export const metadata: Metadata = {
+//   title: "eCart",
+//   description:
+//     "eCart is an e-commerce platform built with Next.js and Mantine.",
+// };
 
 export default function RootLayout({
   children,
