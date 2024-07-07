@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const BASE_URL = 'http://localhost:8000';
 
@@ -43,7 +44,7 @@ export const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.isAuthenticated = false;
-            // state._id = '';
+            state._id = '';
             state.username = '';
             state.email = '';
             state.country = '';
@@ -75,7 +76,7 @@ export const authSlice = createSlice({
             state.authLoading = true;
         })
         builder.addCase(login.fulfilled, (state, action) => {
-            localStorage.setItem('userData', JSON.stringify(action.payload));
+            Cookies.set('userData', JSON.stringify(action.payload), { expires: 1 });
             state.authLoading = false;
             state.isAuthenticated = true;
             state._id = action.payload._id;
