@@ -26,23 +26,26 @@ const CustomButton = ({
   size,
 }: CustomButtonProps) => {
   return (
-    <Button
+    <button
       type={type}
       onClick={onClick}
-      variant={variant ? variant : "contained"}
       disabled={disabled}
       id={id}
-      endIcon={icon ? <IconDownload size={14} /> : null}
-      fullWidth={width === "full" ? true : false}
-      size={size}
       className={`${
         variant === "outlined"
           ? "border-[1px] border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
           : "bg-orange-400 text-white hover:bg-orange-600 hover:text-white"
-      } capitalize hover:border-orange-600`}
+      } capitalize hover:border-orange-600 ${
+        size === "large"
+          ? "px-[22px] py-[8px]"
+          : size === "medium"
+          ? "px-[16px] py-[6px]"
+          : "px-[10px] py-[4px]"
+      } ${width === "full" ? "w-full" : "w-fit"} rounded-md`}
     >
       {label}
-    </Button>
+      {icon && <IconDownload size={20} />}
+    </button>
   );
 };
 

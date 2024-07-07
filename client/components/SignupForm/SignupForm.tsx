@@ -90,7 +90,7 @@ const SignupForm = () => {
         label="Create Account"
         type="submit"
         width="full"
-        size="medium"
+        size="large"
       />
     </form>
   );

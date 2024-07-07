@@ -102,7 +102,6 @@ export const login = createAsyncThunk('auth/login', async (userData: UserData, {
         const response = await axios.post(`${BASE_URL}/user/login`, userData, {
             withCredentials: true
         });
-        // cookies().set('name', 'value')
 
         if (response.data.message !== "User Authenticated!") {
             console.log(response.data.message);

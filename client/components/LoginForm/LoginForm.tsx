@@ -78,7 +78,7 @@ const LoginForm = () => {
         label="Login"
         type="submit"
         width="full"
-        size="medium"
+        size="large"
       />
     </form>
   );
