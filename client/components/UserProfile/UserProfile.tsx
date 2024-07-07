@@ -13,8 +13,6 @@ import { useAppSelector } from "@/lib/store/hooks";
 const UserProfile = () => {
   const loggedIn = useAppSelector((state) => state.auth.isAuthenticated);
 
-  console.log(loggedIn);
-
   return !loggedIn ? (
     <Link href={"/login"}>
       <CustomButton

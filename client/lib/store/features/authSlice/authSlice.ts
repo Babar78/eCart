@@ -52,6 +52,21 @@ export const authSlice = createSlice({
             state.phone = '';
             state.cnic = '';
             state.profilePictureURL = '';
+        },
+        fillSavedData: (state, action) => {
+            const userData = JSON.parse(action.payload);
+            if (userData) {
+                state.isAuthenticated = true;
+                state._id = userData._id;
+                state.username = userData.username;
+                state.email = userData.email;
+                state.country = userData.country;
+                state.address = userData.address;
+                state.role = userData.role;
+                state.phone = userData.phone;
+                state.cnic = userData.cnic;
+                state.profilePictureURL = userData.profilePictureURL;
+            }
         }
     },
     extraReducers: (builder) => {
@@ -60,6 +75,7 @@ export const authSlice = createSlice({
             state.authLoading = true;
         })
         builder.addCase(login.fulfilled, (state, action) => {
+            localStorage.setItem('userData', JSON.stringify(action.payload));
             state.authLoading = false;
             state.isAuthenticated = true;
             state._id = action.payload._id;
@@ -73,7 +89,6 @@ export const authSlice = createSlice({
             state.profilePictureURL = action.payload.profilePictureURL;
         })
         builder.addCase(login.rejected, (state, action: any) => {
-            console.log(action.payload.message);
             state.authLoading = false;
         })
     }
@@ -89,7 +104,6 @@ export const login = createAsyncThunk('auth/login', async (userData: UserData, {
         if (response.data.message !== "User Authenticated!") {
             console.log(response.data.message);
         }
-        console.log(response.data.userData);
 
         return response.data.userData;
     }
@@ -99,7 +113,7 @@ export const login = createAsyncThunk('auth/login', async (userData: UserData, {
 })
 
 
-export const { logout } = authSlice.actions
+export const { logout, fillSavedData } = authSlice.actions
 
 export const isAuthenticated = (state: any) => state.auth.isAuthenticated;
 

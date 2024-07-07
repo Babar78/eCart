@@ -34,7 +34,6 @@ const LoginForm = () => {
   const { username, isAuthenticated } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log("Authenticated", isAuthenticated);
     if (isAuthenticated) {
       router.push("/");
     }
