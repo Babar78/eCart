@@ -58,9 +58,13 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         // login
         builder.addCase(login.pending, (state, action) => {
+            console.log("Pending");
+
             state.authLoading = true;
         })
         builder.addCase(login.fulfilled, (state, action) => {
+            console.log("Fulfilled");
+
             state.authLoading = false;
             state.isAuthenticated = true;
             state._id = action.payload._id;
@@ -81,11 +85,18 @@ export const authSlice = createSlice({
 })
 
 export const login = createAsyncThunk('auth/login', async (userData: UserData, { rejectWithValue }) => {
-
     try {
-        const response = await axios.post(`${BASE_URL}/user/login`, userData);
-        console.log(response.data);
-        return response.data;
+        const response = await axios.post(`${BASE_URL}/user/login`, userData, {
+            withCredentials: true
+        });
+        // cookies().set('name', 'value')
+
+        if (response.data.message !== "User Authenticated!") {
+            console.log(response.data.message);
+        }
+        console.log(response.data.userData);
+
+        return response.data.userData;
     }
     catch (error: any) {
         return rejectWithValue(error.response.data);
