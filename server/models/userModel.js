@@ -81,6 +81,7 @@ userSchema.static(
 
         if (hashedPassword !== userProvidedHash)
             throw new Error("Incorrect Password!");
+        // Create token for user and saves it to the cookies of user
         const token = createTokenForUser(user);
         return {
             user,

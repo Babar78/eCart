@@ -1,7 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { signup } from "@/lib/store/features/authSlice/authSlice";
+import { useRouter } from "next/navigation";
 
 type FormProps = {
   username: string;
@@ -12,6 +15,8 @@ type FormProps = {
 };
 
 const SignupForm = () => {
+  const dispatch = useAppDispatch();
+
   const [data, setData] = React.useState({
     username: "",
     email: "",
@@ -24,8 +29,28 @@ const SignupForm = () => {
     setData({ ...data, [field]: e });
   };
 
+  // Handle form submit
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(signup(data));
+  };
+
+  // Redirect to home page after successful signup
+  const router = useRouter();
+
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
+
   return (
-    <form className="sm:w-[370px] mt-5 space-y-10 lg:pr-[20px]">
+    <form
+      className="sm:w-[370px] mt-5 space-y-10 lg:pr-[20px]"
+      onSubmit={handleFormSubmit}
+    >
       <div className="lg:text-start text-center text-[#1a1a1a]">
         <h5 className="font-semibold text-[36px]">Create an Account</h5>
         <span>Enter Your Details Below</span>

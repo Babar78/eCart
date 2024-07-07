@@ -1,17 +1,48 @@
 import usersModel from "../models/userModel.js";
+import { createTokenForUser } from "../services/auth.js";
 
 
 export const signup = async (req, res) => {
     const { username, email, password, country } = req.body;
 
-    const user = await usersModel.create({
-        username,
-        email,
-        password,
-        country,
-    });
+    try {
 
-    return res.status(201).json({ user });
+        // Check if the user already exists
+        const userExists = await usersModel.findOne({ email });
+        if (userExists) {
+            return res.status(400).send({
+                message: "User already exists!",
+            });
+        }
+        else {
+            const user = await usersModel.create({
+                username,
+                email,
+                password,
+                country,
+            });
+            // If the user is created successfully, then save the token in the cookie
+            const token = createTokenForUser(user);
+
+            res.cookie("token", token, {
+                httpOnly: false,
+                secure: process.env.NODE_ENV === "production",
+            });
+
+            return res.status(201).json({
+                message: "User created successfully!",
+                userData: {
+                    ...user["_doc"],
+                }
+            });
+        }
+    }
+    catch (err) {
+        return res.status(400).send({
+            message: "Could not create user account. Please try again later.",
+            error: err.message
+        });
+    }
 }
 
 export const login = async (req, res) => {
@@ -27,8 +58,7 @@ export const login = async (req, res) => {
             message: "User Authenticated!",
             userData: {
                 ...resData.user["_doc"],
-            },
-            token: resData.token,
+            }
         });
     }
     catch (err) {

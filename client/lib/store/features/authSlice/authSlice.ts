@@ -91,7 +91,34 @@ export const authSlice = createSlice({
             state.cnic = action.payload.cnic;
             state.profilePictureURL = action.payload.profilePictureURL;
         })
-        builder.addCase(login.rejected, (state, action: any) => {
+        builder.addCase(login.rejected, (state, action) => {
+            state.authLoading = false;
+        })
+
+        //signup
+        builder.addCase(signup.pending, (state, action) => {
+            console.log('signup pending');
+
+            state.authLoading = true;
+        })
+        builder.addCase(signup.fulfilled, (state, action) => {
+            console.log('signup fulfilled');
+            console.log(action.payload);
+            Cookies.set('userData', JSON.stringify(action.payload), { expires: 1 });
+            state.authLoading = false;
+            state.isAuthenticated = true;
+            console.log("state: ", state.isAuthenticated);
+            state._id = action.payload._id;
+            state.username = action.payload.username;
+            state.email = action.payload.email;
+            state.country = action.payload.country;
+            state.address = action.payload.address;
+            state.role = action.payload.role;
+            state.phone = action.payload.phone;
+            state.cnic = action.payload.cnic;
+            state.profilePictureURL = action.payload.profilePictureURL;
+        })
+        builder.addCase(signup.rejected, (state, action) => {
             state.authLoading = false;
         })
     }
@@ -112,7 +139,24 @@ export const login = createAsyncThunk('auth/login', async (userData: UserData, {
     catch (error: any) {
         return rejectWithValue(error.response.data);
     }
-})
+});
+
+export const signup = createAsyncThunk('auth/signup', async (userData: UserData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/user/signup`, userData, {
+            withCredentials: true
+        });
+
+        if (response.status !== 201) {
+            console.log(response.data.message);
+        }
+
+        return response.data.userData;
+    }
+    catch (error: any) {
+        return rejectWithValue(error.response.data);
+    }
+});
 
 
 export const { logout, fillSavedData } = authSlice.actions

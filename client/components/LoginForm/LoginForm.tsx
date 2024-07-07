@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const { username, isAuthenticated } = useAppSelector((state) => state.auth);
+  const {isAuthenticated } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAuthenticated) {
