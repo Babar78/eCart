@@ -43,6 +43,8 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
+            Cookies.remove('userData');
+            Cookies.remove('token');
             state.isAuthenticated = false;
             state._id = '';
             state.username = '';

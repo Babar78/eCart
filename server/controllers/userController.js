@@ -19,7 +19,8 @@ export const login = async (req, res) => {
     try {
         const resData = await usersModel.matchPasswordAndGenerateToken(email, password);
         res.cookie("token", resData.token, {
-            httpOnly: true,
+            // If httpOnly is set true, the cookie is not accessible via client-side JavaScript means it can't be removed or accessed by JavaScript from frontend.
+            httpOnly: false,
             secure: process.env.NODE_ENV === "production",
         });
         return res.status(200).json({

@@ -14,7 +14,11 @@ export default function StoreProvider({
   if (!storeRef.current) {
     // Create the store instance the first time this renders
     storeRef.current = makeStore();
-    storeRef.current.dispatch(fillSavedData(Cookies.get("userData")));
+
+    // Fill the saved data from cookies if it exists\
+    if (Cookies.get("userData")) {
+      storeRef.current.dispatch(fillSavedData(Cookies.get("userData")));
+    }
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>;
